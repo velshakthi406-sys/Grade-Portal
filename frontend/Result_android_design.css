@@ -118,19 +118,22 @@ input[class*="filter"]:focus {
 .batch-filter-container {
   display: flex !important;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 8px;
   width: 100%;
   padding: 8px 0;
   margin: 8px 0;
   align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 .batch-pill,
 .batch-tab,
 [class*="batch"][class*="pill"] {
   display: inline-flex !important;
-  flex: 0 1 auto;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
   padding: 10px 16px;
@@ -149,6 +152,7 @@ input[class*="filter"]:focus {
   visibility: visible !important;
   opacity: 1 !important;
   pointer-events: auto !important;
+  flex-shrink: 0;
 }
 
 .batch-pill:hover,
@@ -161,7 +165,7 @@ input[class*="filter"]:focus {
 .batch-tab.active,
 [class*="batch"][class*="pill"].active {
   background-color: var(--primary);
-  color: white;
+  color: var(--text-inverse);
   border-color: var(--primary);
   font-weight: 600;
 }
@@ -274,7 +278,7 @@ input[class*="filter"]:focus {
 [class*="dept"][class*="pill"].active,
 [class*="dept"][class*="tab"].active {
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: white;
+  color: var(--text-inverse);
   border-color: var(--primary-dark);
   font-weight: 600;
   box-shadow: 0 4px 12px var(--primary-glow);
@@ -321,7 +325,7 @@ input[class*="filter"]:focus {
 .dept-pill.active .badge-count,
 .dept-tab.active .badge-count {
   background-color: rgba(255, 255, 255, 0.25);
-  color: white;
+  color: var(--text-inverse);
 }
 
 /* Ensure pills don't compress */
@@ -341,39 +345,39 @@ input[class*="filter"]:focus {
 [data-theme="light"] .dept-pill,
 [data-theme="light"] .dept-tab,
 [data-theme="light"] .dept-button {
-  background-color: #F3F4F6;
-  border-color: #D1D5DB;
-  color: #111827;
+  background-color: var(--bg-primary);
+  border-color: var(--border);
+  color: var(--text-primary);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 [data-theme="light"] .dept-pill:hover,
 [data-theme="light"] .dept-tab:hover,
 [data-theme="light"] .dept-button:hover {
-  background-color: #E5E7EB;
-  border-color: #DC2626;
+  background-color: var(--bg-hover);
+  border-color: var(--primary);
   box-shadow: 0 2px 6px rgba(220, 38, 38, 0.12);
 }
 
 [data-theme="light"] .dept-pill.active,
 [data-theme="light"] .dept-tab.active,
 [data-theme="light"] .dept-button.active {
-  background: linear-gradient(135deg, #DC2626, #B91C1C);
-  color: white;
-  border-color: #B91C1C;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: var(--text-inverse);
+  border-color: var(--primary-dark);
   box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
 }
 
 [data-theme="light"] .dept-pill .badge-count,
 [data-theme="light"] .dept-tab .badge-count {
   background-color: rgba(0, 0, 0, 0.08);
-  color: #111827;
+  color: var(--text-primary);
 }
 
 [data-theme="light"] .dept-pill.active .badge-count,
 [data-theme="light"] .dept-tab.active .badge-count {
   background-color: rgba(255, 255, 255, 0.3);
-  color: white;
+  color: var(--text-inverse);
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -383,39 +387,39 @@ input[class*="filter"]:focus {
 [data-theme="dark"] .dept-pill,
 [data-theme="dark"] .dept-tab,
 [data-theme="dark"] .dept-button {
-  background-color: #1F2937;
-  border-color: #4B5563;
-  color: #F3F4F6;
+  background-color: var(--bg-surface);
+  border-color: var(--border-medium);
+  color: var(--text-primary);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="dark"] .dept-pill:hover,
 [data-theme="dark"] .dept-tab:hover,
 [data-theme="dark"] .dept-button:hover {
-  background-color: #374151;
-  border-color: #6366F1;
+  background-color: var(--bg-hover);
+  border-color: var(--indigo);
   box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
 }
 
 [data-theme="dark"] .dept-pill.active,
 [data-theme="dark"] .dept-tab.active,
 [data-theme="dark"] .dept-button.active {
-  background: linear-gradient(135deg, #6366F1, #4F46E5);
-  color: white;
-  border-color: #4F46E5;
+  background: linear-gradient(135deg, var(--indigo), var(--indigo-dark));
+  color: var(--text-primary);
+  border-color: var(--indigo-dark);
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
 }
 
 [data-theme="dark"] .dept-pill .badge-count,
 [data-theme="dark"] .dept-tab .badge-count {
   background-color: rgba(255, 255, 255, 0.1);
-  color: #F3F4F6;
+  color: var(--text-secondary);
 }
 
 [data-theme="dark"] .dept-pill.active .badge-count,
 [data-theme="dark"] .dept-tab.active .badge-count {
   background-color: rgba(255, 255, 255, 0.25);
-  color: white;
+  color: var(--text-inverse);
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -479,7 +483,7 @@ input[class*="filter"]:focus {
 .role-pill-btn.active,
 .role-pill.active {
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: white;
+  color: var(--text-inverse);
   border-color: var(--primary-dark);
   font-weight: 600;
   box-shadow: 0 6px 16px var(--primary-glow);
@@ -525,24 +529,24 @@ input[class*="filter"]:focus {
 
 [data-theme="light"] .role-pill-btn,
 [data-theme="light"] .role-pill {
-  background-color: #F9FAFB;
-  border-color: #E5E7EB;
-  color: #111827;
+  background-color: var(--bg-primary);
+  border-color: var(--border);
+  color: var(--text-primary);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 [data-theme="light"] .role-pill-btn:hover,
 [data-theme="light"] .role-pill:hover {
-  background-color: #F3F4F6;
-  border-color: #DC2626;
+  background-color: var(--bg-hover);
+  border-color: var(--primary);
   box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
 }
 
 [data-theme="light"] .role-pill-btn.active,
 [data-theme="light"] .role-pill.active {
-  background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%);
-  color: white;
-  border-color: #991B1B;
+  background: linear-gradient(135deg, var(--primary), var(--red-deep));
+  color: var(--text-inverse);
+  border-color: var(--red-deep);
   box-shadow: 0 6px 20px rgba(220, 38, 38, 0.25);
 }
 
@@ -557,24 +561,24 @@ input[class*="filter"]:focus {
 
 [data-theme="dark"] .role-pill-btn,
 [data-theme="dark"] .role-pill {
-  background-color: #1F2937;
-  border-color: #4B5563;
-  color: #F3F4F6;
+  background-color: var(--bg-surface);
+  border-color: var(--border-medium);
+  color: var(--text-primary);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="dark"] .role-pill-btn:hover,
 [data-theme="dark"] .role-pill:hover {
-  background-color: #374151;
-  border-color: #6366F1;
+  background-color: var(--bg-hover);
+  border-color: var(--indigo);
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
 }
 
 [data-theme="dark"] .role-pill-btn.active,
 [data-theme="dark"] .role-pill.active {
-  background: linear-gradient(135deg, #6366F1 0%, #4338CA 100%);
-  color: white;
-  border-color: #4338CA;
+  background: linear-gradient(135deg, var(--indigo), var(--indigo-deep));
+  color: var(--text-primary);
+  border-color: var(--indigo-deep);
   box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
 }
 
@@ -633,9 +637,9 @@ input[class*="filter"]:focus {
   /* Filter items - stack but don't shrink */
   .filter-item,
   .filter-item-compact {
-    flex: 1 1 100%;
-    min-width: 100%;
-    width: 100%;
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 160px;
   }
 
   /* Ensure selects take full width */
@@ -923,5 +927,5 @@ input[class*="filter"]:focus {
 [data-theme="dark"] .section-pill.active,
 [data-theme="dark"] .role-pill-btn.active {
   background-color: var(--primary);
-  color: white;
+  color: var(--text-inverse);
 }

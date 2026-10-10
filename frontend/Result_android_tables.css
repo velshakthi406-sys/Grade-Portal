@@ -345,32 +345,32 @@
    ════════════════════════════════════════════════════════════ */
 
   [data-theme="light"] .data-table {
-    background-color: #FFFFFF;
+    background-color: var(--bg-primary);
   }
 
   [data-theme="light"] .data-table thead {
-    background: linear-gradient(135deg, #F3F4F6, #EDE9FE);
+    background: var(--bg-secondary);
   }
 
   [data-theme="light"] .data-table thead tr,
   [data-theme="light"] .data-table th {
     background: transparent;
-    color: #1E3A8A;
-    border-bottom: 2px solid #C7D2FE;
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--border-medium);
   }
 
   /* Alternating rows - subtle indigo tint */
   [data-theme="light"] .data-table tbody tr:nth-child(odd) {
-    background-color: #FFFFFF;
+    background-color: var(--bg-primary);
   }
 
   [data-theme="light"] .data-table tbody tr:nth-child(even) {
-    background-color: #F5F3FF;
+    background-color: var(--bg-muted);
   }
 
   [data-theme="light"] .data-table tbody tr:hover,
   [data-theme="light"] .data-table tbody tr:nth-child(even):hover {
-    background-color: #EDE9FE;
+    background-color: var(--bg-hover);
   }
 
   [data-theme="light"] .data-table tbody tr:active {
@@ -378,8 +378,8 @@
   }
 
   [data-theme="light"] .data-table td {
-    color: #374151;
-    border-bottom-color: #EDE9FE;
+    color: var(--text-secondary);
+    border-bottom-color: var(--border-light);
   }
 
   /* Primary cells - use Result.css indigo */
@@ -409,33 +409,33 @@
    ════════════════════════════════════════════════════════════ */
 
   [data-theme="dark"] .data-table {
-    background-color: #111827;
+    background-color: var(--bg-primary);
   }
 
   [data-theme="dark"] .data-table thead {
-    background: linear-gradient(135deg, #1E1B4B, #1E3A5F);
+    background: var(--bg-secondary);
   }
 
   [data-theme="dark"] .data-table thead tr,
   [data-theme="dark"] .data-table th {
     background: transparent;
-    color: #818CF8;
-    border-bottom: 2px solid #3730A3;
+    color: var(--indigo-light);
+    border-bottom: 2px solid var(--border-medium);
     letter-spacing: 0.06em;
   }
 
   /* Alternating rows - dark indigo/slate tint */
   [data-theme="dark"] .data-table tbody tr:nth-child(odd) {
-    background-color: #111827;
+    background-color: var(--bg-primary);
   }
 
   [data-theme="dark"] .data-table tbody tr:nth-child(even) {
-    background-color: #1A1F35;
+    background-color: var(--bg-muted);
   }
 
   [data-theme="dark"] .data-table tbody tr:hover,
   [data-theme="dark"] .data-table tbody tr:nth-child(even):hover {
-    background-color: #1E2A45;
+    background-color: var(--bg-hover);
   }
 
   [data-theme="dark"] .data-table tbody tr:active {
@@ -443,8 +443,8 @@
   }
 
   [data-theme="dark"] .data-table td {
-    color: #D1D5DB;
-    border-bottom-color: #1E2A45;
+    color: var(--text-secondary);
+    border-bottom-color: var(--border-light);
   }
 
   /* Primary cells - use Result.css indigo */
@@ -454,7 +454,7 @@
   }
 
   [data-theme="dark"] .data-table td:nth-child(3) {
-    color: #F9FAFB;
+    color: var(--text-primary);
     font-weight: 600;
   }
 
@@ -474,7 +474,30 @@
    ════════════════════════════════════════════════════════════ */
 
   #grades-table {
-    min-width: 620px;
+    width: 1077px;
+    min-width: 1077px;
+    table-layout: fixed;
+  }
+
+  #grades-table tbody tr::before {
+    content: none;
+    display: none;
+  }
+
+  #grades-table col:nth-child(1) { width: 38px; }
+  #grades-table col:nth-child(2) { width: 124px; }
+  #grades-table col:nth-child(3) { width: 220px; }
+  #grades-table col:nth-child(4) { width: 110px; }
+  #grades-table col:nth-child(5) { width: 115px; }
+  #grades-table col:nth-child(6),
+  #grades-table col:nth-child(7) { width: 78px; }
+  #grades-table col:nth-child(8) { width: 88px; }
+  #grades-table col:nth-child(9) { width: 96px; }
+  #grades-table col:nth-child(10) { width: 130px; }
+
+  #grades-table th:first-child,
+  #grades-table td:first-child {
+    text-align: center;
   }
 
   /* SGPA/CGPA columns - use Result.css teal */
@@ -506,6 +529,11 @@
     min-width: 700px;
   }
 
+  #results-table tbody tr::before {
+    content: none;
+    display: none;
+  }
+
   /* Grade column (col 8) - use Result.css amber */
   [data-theme="light"] #results-table td:nth-child(8) {
     font-weight: 800;
@@ -529,6 +557,11 @@
 
   #classreport-table {
     min-width: 520px;
+  }
+
+  #classreport-table tbody tr::before {
+    content: none;
+    display: none;
   }
 
   /* Arrear status column (last) - use Result.css violet */
@@ -629,12 +662,22 @@
     min-width: 600px;
   }
 
+  #students-table tbody tr::before {
+    content: none;
+    display: none;
+  }
+
 /* ════════════════════════════════════════════════════════════
    15. SUBJECTS TABLE
    ════════════════════════════════════════════════════════════ */
 
   #subjects-table {
     min-width: 480px;
+  }
+
+  #subjects-table tbody tr::before {
+    content: none;
+    display: none;
   }
 
 /* ════════════════════════════════════════════════════════════
@@ -686,7 +729,7 @@
   .pagination .active,
   .pagination button.active {
     background-color: var(--primary);
-    color: white;
+    color: var(--text-inverse);
   }
 
 /* ════════════════════════════════════════════════════════════

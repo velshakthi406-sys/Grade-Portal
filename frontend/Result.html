@@ -51,9 +51,6 @@
     <link rel="stylesheet" href="Result.css" />
   </noscript>
 
-  <!-- Mobile Responsive Styles -->
-  <link rel="stylesheet" href="Result_mobile.css" />
-
   <!-- Android Material Design System - Filter & Pills Optimization -->
   <link rel="stylesheet" href="Result_android_design.css" />
 
@@ -62,6 +59,9 @@
 
   <!-- Android Flutter/Material Design 3 - Data Tables Navigation -->
   <link rel="stylesheet" href="Result_android_tables.css" />
+
+  <!-- Mobile Responsive Styles (last to keep cross-platform overrides consistent) -->
+  <link rel="stylesheet" href="Result_mobile.css" />
 
   <!-- Libraries - Defer non-critical scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
@@ -1527,12 +1527,12 @@
           </div>
 
           <!-- Batch Pills with Count Badges -->
-          <div class="dept-tabs">
+          <div class="dept-tabs grade-tabs-scroll-region">
             <div class="dept-tabs-scroll" id="results-batch-tabs-container"></div>
           </div>
 
           <!-- Department+Section Pills (EXACT match to Students/SGPA/CGPA/Class Report style) -->
-          <div class="dept-tabs">
+          <div class="dept-tabs grade-tabs-scroll-region">
             <div class="dept-tabs-scroll" id="results-dept-tabs-container"></div>
           </div>
 
@@ -1718,11 +1718,11 @@
           </div>
 
           <!-- Batch tabs -->
-          <div class="dept-tabs">
+          <div class="dept-tabs students-filter-tabs">
             <div class="dept-tabs-scroll" id="batch-tabs-container"></div>
           </div>
           <!-- Section tabs -->
-          <div class="dept-tabs">
+          <div class="dept-tabs students-filter-tabs">
             <div class="dept-tabs-scroll" id="section-tabs-container"></div>
           </div>
 
@@ -1924,11 +1924,11 @@
           </div>
 
           <!-- Batch Pills -->
-          <div class="dept-tabs">
+          <div class="dept-tabs grade-tabs-scroll-region">
             <div class="dept-tabs-scroll" id="grade-batch-tabs-container"></div>
           </div>
           <!-- Department Pills -->
-          <div class="dept-tabs">
+          <div class="dept-tabs grade-tabs-scroll-region">
             <div class="dept-tabs-scroll" id="grade-dept-tabs-container"></div>
           </div>
 
@@ -2056,7 +2056,20 @@
 
           <!-- Grades Table -->
           <div id="grades-table-container" class="table-scroll-region">
-            <table class="data-table" id="grades-table">
+            <table class="data-table" id="grades-table"
+              style="width:1077px;min-width:1077px;table-layout:fixed">
+              <colgroup>
+                <col style="width:38px" />
+                <col style="width:124px" />
+                <col style="width:220px" />
+                <col style="width:110px" />
+                <col style="width:115px" />
+                <col style="width:78px" />
+                <col style="width:78px" />
+                <col style="width:88px" />
+                <col style="width:96px" />
+                <col style="width:130px" />
+              </colgroup>
               <thead>
                 <tr>
                   <th>#</th>
@@ -2108,11 +2121,11 @@
           </div>
 
           <!-- Batch Pills -->
-          <div class="dept-tabs">
+          <div class="dept-tabs grade-tabs-scroll-region">
             <div class="dept-tabs-scroll" id="cr-batch-tabs-container"></div>
           </div>
           <!-- Department Pills -->
-          <div class="dept-tabs">
+          <div class="dept-tabs grade-tabs-scroll-region">
             <div class="dept-tabs-scroll" id="cr-dept-tabs-container"></div>
           </div>
 
