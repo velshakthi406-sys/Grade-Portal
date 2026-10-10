@@ -1,0 +1,741 @@
+/* ============================================================
+   ANDROID FLUTTER/MATERIAL DESIGN 3 - DATA TABLES
+   Easy navigation, touch-friendly rows, sticky headers,
+   horizontal momentum scroll, card-style layout
+   Applies ONLY to mobile (max-width: 768px)
+   ============================================================ */
+
+/* ════════════════════════════════════════════════════════════
+    1. TABLE SCROLL WRAPPER - MOMENTUM SCROLL CONTAINER
+    ════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  .table-scroll-region,
+  .arrear-modal-table-container,
+  [id$="-table-container"] {
+    display: block !important;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    scroll-snap-type: none;
+    overscroll-behavior-x: contain;
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+    margin-bottom: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-medium) transparent;
+    position: relative;
+    background: var(--bg-surface);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .table-scroll-region::-webkit-scrollbar,
+  .arrear-modal-table-container::-webkit-scrollbar,
+  [id$="-table-container"]::-webkit-scrollbar {
+    height: 5px;
+  }
+
+  .table-scroll-region::-webkit-scrollbar-track,
+  .arrear-modal-table-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .table-scroll-region::-webkit-scrollbar-thumb,
+  .arrear-modal-table-container::-webkit-scrollbar-thumb {
+    background: var(--border-medium);
+    border-radius: 3px;
+  }
+
+  /* Scroll hint indicators - fading edges to show more content */
+  .table-scroll-region::before,
+  .table-scroll-region::after,
+  .arrear-modal-table-container::before,
+  [id$="-table-container"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 28px;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .table-scroll-region::before,
+  .arrear-modal-table-container::before,
+  [id$="-table-container"]::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-surface), transparent);
+    border-radius: 12px 0 0 12px;
+  }
+
+  .table-scroll-region::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-surface), transparent);
+    border-radius: 0 12px 12px 0;
+  }
+
+  /* Show scroll hints when there's overflow */
+  .table-scroll-region:hover::before,
+  .table-scroll-region:hover::after,
+  .table-scroll-region.scroll-hint-left::before,
+  .table-scroll-region.scroll-hint-right::after {
+    opacity: 0.7;
+  }
+
+/* ════════════════════════════════════════════════════════════
+   2. TABLE BASE - MATERIAL DESIGN 3
+   ════════════════════════════════════════════════════════════ */
+
+  .data-table {
+    width: 100%;
+    min-width: max-content;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.85rem;
+    font-family: var(--font-body);
+    text-align: left;
+    background-color: var(--bg-surface);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+/* ════════════════════════════════════════════════════════════
+   3. STICKY HEADER - ALWAYS VISIBLE WHILE SCROLLING
+   ════════════════════════════════════════════════════════════ */
+
+  .data-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--bg-secondary);
+  }
+
+  .data-table thead tr {
+    background: var(--bg-secondary);
+  }
+
+  .data-table th {
+    padding: 10px 14px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+    background: var(--bg-secondary);
+    user-select: none;
+    position: relative;
+  }
+
+  .data-table th::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--primary));
+    opacity: 0.7;
+  }
+
+  /* First column header - slightly larger for index */
+  .data-table th:first-child {
+    padding-left: 16px;
+  }
+
+  /* Last column header - Actions */
+  .data-table th:last-child {
+    padding-right: 16px;
+    text-align: center;
+  }
+
+/* ════════════════════════════════════════════════════════════
+   4. TABLE ROWS - FLUTTER LISTTILE STYLE
+   ════════════════════════════════════════════════════════════ */
+
+  .data-table tbody tr {
+    transition: background 0.15s ease;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  /* Flutter-style ripple press feedback - Material Design 3 */
+  .data-table tbody tr {
+    position: relative;
+    overflow: hidden;
+    transition: background 0.15s ease;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .data-table tbody tr::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, var(--primary-glass) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .data-table tbody tr:active::before {
+    width: 200%;
+    height: 200%;
+    opacity: 1;
+    transition: width 0.01s ease, height 0.01s ease, opacity 0.2s ease;
+  }
+
+  .data-table tbody tr:active {
+    background-color: var(--primary-glass) !important;
+    transition: background 0.05s ease;
+  }
+
+  .data-table tbody tr > td {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Hover state - subtle highlight */
+  .data-table tbody tr:hover {
+    background-color: var(--bg-hover);
+  }
+
+  /* Alternating row colors for easier scanning */
+  .data-table tbody tr:nth-child(even) {
+    background-color: var(--bg-muted);
+  }
+
+  .data-table tbody tr:nth-child(even):hover {
+    background-color: var(--bg-hover);
+  }
+
+  /* Last row - no bottom border */
+  .data-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+/* ════════════════════════════════════════════════════════════
+   5. TABLE CELLS - TOUCH OPTIMIZED
+   ════════════════════════════════════════════════════════════ */
+
+  .data-table td {
+    padding: 12px 14px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    vertical-align: middle;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  /* First cell - index number */
+  .data-table td:first-child {
+    padding-left: 16px;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+    min-width: 32px;
+  }
+
+  /* Last cell - Actions */
+  .data-table td:last-child {
+    padding-right: 16px;
+    text-align: center;
+  }
+
+  /* Primary text cells - Reg No, Name */
+  .data-table td:nth-child(2),
+  .data-table td:nth-child(3) {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+/* ════════════════════════════════════════════════════════════
+   6. ACTION BUTTONS - MATERIAL DESIGN ICON BUTTONS
+   ════════════════════════════════════════════════════════════ */
+
+  .data-table .btn-icon,
+  .data-table button[class*="btn"],
+  .data-table .action-btn,
+  .data-table .edit-btn,
+  .data-table .delete-btn,
+  .data-table .view-btn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    margin: 0 3px;
+    transition: all 0.15s ease;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .data-table .btn-icon:active,
+  .data-table button[class*="btn"]:active {
+    transform: scale(0.92);
+    opacity: 0.85;
+  }
+
+  .data-table .btn-icon svg,
+  .data-table button[class*="btn"] svg {
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+  }
+
+/* ════════════════════════════════════════════════════════════
+   7. BADGE & PILL CELLS - READABLE ON MOBILE
+   ════════════════════════════════════════════════════════════ */
+
+  .data-table .badge,
+  .data-table [class*="badge"],
+  .data-table .status-pill,
+  .data-table [class*="pill"] {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* Student dept pill in students table */
+  .data-table .student-dept-pill {
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+/* ════════════════════════════════════════════════════════════
+   8. EMPTY STATE - FLUTTER STYLE
+   ════════════════════════════════════════════════════════════ */
+
+  .data-table .empty-row td,
+  .data-table td[colspan] {
+    text-align: center;
+    padding: 32px 16px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+/* ════════════════════════════════════════════════════════════
+   9. LIGHT MODE TABLE - WITH RESULT.CSS COLOR ACCENTS
+   ════════════════════════════════════════════════════════════ */
+
+  [data-theme="light"] .data-table {
+    background-color: #FFFFFF;
+  }
+
+  [data-theme="light"] .data-table thead {
+    background: linear-gradient(135deg, #F3F4F6, #EDE9FE);
+  }
+
+  [data-theme="light"] .data-table thead tr,
+  [data-theme="light"] .data-table th {
+    background: transparent;
+    color: #1E3A8A;
+    border-bottom: 2px solid #C7D2FE;
+  }
+
+  /* Alternating rows - subtle indigo tint */
+  [data-theme="light"] .data-table tbody tr:nth-child(odd) {
+    background-color: #FFFFFF;
+  }
+
+  [data-theme="light"] .data-table tbody tr:nth-child(even) {
+    background-color: #F5F3FF;
+  }
+
+  [data-theme="light"] .data-table tbody tr:hover,
+  [data-theme="light"] .data-table tbody tr:nth-child(even):hover {
+    background-color: #EDE9FE;
+  }
+
+  [data-theme="light"] .data-table tbody tr:active {
+    background-color: var(--red-glass) !important;
+  }
+
+  [data-theme="light"] .data-table td {
+    color: #374151;
+    border-bottom-color: #EDE9FE;
+  }
+
+  /* Primary cells - use Result.css indigo */
+  [data-theme="light"] .data-table td:nth-child(2) {
+    color: var(--indigo-dark);
+    font-weight: 700;
+  }
+
+  [data-theme="light"] .data-table td:nth-child(3) {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  [data-theme="light"] .data-table td:first-child {
+    color: var(--violet);
+    font-weight: 700;
+  }
+
+  [data-theme="light"] .table-scroll-region,
+  [data-theme="light"] [id$="-table-container"] {
+    border-color: var(--indigo-light);
+    box-shadow: 0 2px 8px var(--indigo-glass);
+  }
+
+/* ════════════════════════════════════════════════════════════
+   10. DARK MODE TABLE - WITH RESULT.CSS COLOR ACCENTS
+   ════════════════════════════════════════════════════════════ */
+
+  [data-theme="dark"] .data-table {
+    background-color: #111827;
+  }
+
+  [data-theme="dark"] .data-table thead {
+    background: linear-gradient(135deg, #1E1B4B, #1E3A5F);
+  }
+
+  [data-theme="dark"] .data-table thead tr,
+  [data-theme="dark"] .data-table th {
+    background: transparent;
+    color: #818CF8;
+    border-bottom: 2px solid #3730A3;
+    letter-spacing: 0.06em;
+  }
+
+  /* Alternating rows - dark indigo/slate tint */
+  [data-theme="dark"] .data-table tbody tr:nth-child(odd) {
+    background-color: #111827;
+  }
+
+  [data-theme="dark"] .data-table tbody tr:nth-child(even) {
+    background-color: #1A1F35;
+  }
+
+  [data-theme="dark"] .data-table tbody tr:hover,
+  [data-theme="dark"] .data-table tbody tr:nth-child(even):hover {
+    background-color: #1E2A45;
+  }
+
+  [data-theme="dark"] .data-table tbody tr:active {
+    background-color: var(--indigo-glass) !important;
+  }
+
+  [data-theme="dark"] .data-table td {
+    color: #D1D5DB;
+    border-bottom-color: #1E2A45;
+  }
+
+  /* Primary cells - use Result.css indigo */
+  [data-theme="dark"] .data-table td:nth-child(2) {
+    color: var(--indigo-light);
+    font-weight: 700;
+  }
+
+  [data-theme="dark"] .data-table td:nth-child(3) {
+    color: #F9FAFB;
+    font-weight: 600;
+  }
+
+  [data-theme="dark"] .data-table td:first-child {
+    color: var(--violet-light);
+    font-weight: 700;
+  }
+
+  [data-theme="dark"] .table-scroll-region,
+  [data-theme="dark"] [id$="-table-container"] {
+    border-color: var(--indigo-deep);
+    box-shadow: 0 2px 8px var(--indigo-glass);
+  }
+
+/* ════════════════════════════════════════════════════════════
+   11. GRADES TABLE - SGPA/CGPA TEAL HIGHLIGHT
+   ════════════════════════════════════════════════════════════ */
+
+  #grades-table {
+    min-width: 620px;
+  }
+
+  /* SGPA/CGPA columns - use Result.css teal */
+  [data-theme="light"] #grades-table td:nth-child(6),
+  [data-theme="light"] #grades-table td:nth-child(7) {
+    font-weight: 800;
+    font-size: 0.92rem;
+    color: var(--teal-dark) !important;
+    background-color: var(--teal-glass);
+    border-radius: 4px;
+    padding: 6px 10px !important;
+  }
+
+  [data-theme="dark"] #grades-table td:nth-child(6),
+  [data-theme="dark"] #grades-table td:nth-child(7) {
+    font-weight: 800;
+    font-size: 0.92rem;
+    color: var(--teal-light) !important;
+    background-color: var(--teal-glass);
+    border-radius: 4px;
+    padding: 6px 10px !important;
+  }
+
+/* ════════════════════════════════════════════════════════════
+   12. RESULTS TABLE - GRADE COLUMN AMBER HIGHLIGHT
+   ════════════════════════════════════════════════════════════ */
+
+  #results-table {
+    min-width: 700px;
+  }
+
+  /* Grade column (col 8) - use Result.css amber */
+  [data-theme="light"] #results-table td:nth-child(8) {
+    font-weight: 800;
+    color: var(--amber-dark) !important;
+    background-color: var(--amber-glass);
+    border-radius: 4px;
+    padding: 4px 8px !important;
+  }
+
+  [data-theme="dark"] #results-table td:nth-child(8) {
+    font-weight: 800;
+    color: var(--amber-light) !important;
+    background-color: var(--amber-glass);
+    border-radius: 4px;
+    padding: 4px 8px !important;
+  }
+
+/* ════════════════════════════════════════════════════════════
+   13. CLASS REPORT - ARREAR STATUS COLUMN COLOR
+   ════════════════════════════════════════════════════════════ */
+
+  #classreport-table {
+    min-width: 520px;
+  }
+
+  /* Arrear status column (last) - use Result.css violet */
+  [data-theme="light"] #classreport-table td:last-child {
+    font-weight: 700;
+    color: var(--violet) !important;
+    background-color: var(--violet-glass);
+    border-radius: 4px;
+    padding: 4px 8px !important;
+  }
+
+  [data-theme="dark"] #classreport-table td:last-child {
+    font-weight: 700;
+    color: var(--violet-light) !important;
+    background-color: var(--violet-glass);
+    border-radius: 4px;
+    padding: 4px 8px !important;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .data-table th {
+    padding: 9px 10px;
+    font-size: 0.68rem;
+  }
+
+  .data-table td {
+    padding: 11px 10px;
+    font-size: 0.8rem;
+  }
+
+  .data-table td:first-child {
+    padding-left: 12px;
+    font-size: 0.72rem;
+  }
+
+  .data-table td:last-child {
+    padding-right: 12px;
+  }
+
+  .data-table .btn-icon,
+  .data-table button[class*="btn"],
+  .data-table .action-btn {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    padding: 6px;
+    margin: 0 2px;
+  }
+
+  .data-table .btn-icon svg,
+  .data-table button[class*="btn"] svg {
+    width: 14px;
+    height: 14px;
+  }
+
+}
+
+/* ════════════════════════════════════════════════════════════
+   12. VERY SMALL PHONE - 360px AND BELOW
+   ════════════════════════════════════════════════════════════ */
+
+@media (max-width: 360px) {
+
+  .data-table th {
+    padding: 8px 8px;
+    font-size: 0.64rem;
+  }
+
+  .data-table td {
+    padding: 10px 8px;
+    font-size: 0.76rem;
+  }
+
+  .data-table td:first-child {
+    padding-left: 10px;
+  }
+
+  .data-table td:last-child {
+    padding-right: 10px;
+  }
+
+}
+
+/* ════════════════════════════════════════════════════════════
+   13. RESULTS TABLE - WIDE (many columns)
+   ════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+/* ════════════════════════════════════════════════════════════
+   14. STUDENTS TABLE
+   ════════════════════════════════════════════════════════════ */
+
+  #students-table {
+    min-width: 600px;
+  }
+
+/* ════════════════════════════════════════════════════════════
+   15. SUBJECTS TABLE
+   ════════════════════════════════════════════════════════════ */
+
+  #subjects-table {
+    min-width: 480px;
+  }
+
+/* ════════════════════════════════════════════════════════════
+   16. RESOURCES TABLE
+   ════════════════════════════════════════════════════════════ */
+
+  #resources-table {
+    min-width: 500px;
+  }
+
+/* ════════════════════════════════════════════════════════════
+   19. PAGINATION - TOUCH FRIENDLY
+   ════════════════════════════════════════════════════════════ */
+
+  .pagination,
+  .pagination-row,
+  [class*="pagination"] {
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 0;
+    margin-top: 8px;
+  }
+
+  .pagination button,
+  .pagination-btn,
+  [class*="pagination"] button {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    min-height: 36px;
+    padding: 8px 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: all 0.15s ease;
+  }
+
+  .pagination button:active,
+  .pagination-btn:active {
+    transform: scale(0.94);
+  }
+
+  .pagination .active,
+  .pagination button.active {
+    background-color: var(--primary);
+    color: white;
+  }
+
+/* ════════════════════════════════════════════════════════════
+   20. TABLE COUNT / SHOWING LABEL
+   ════════════════════════════════════════════════════════════ */
+
+  .table-count,
+  .showing-count,
+  [class*="count-display"],
+  [id*="showing"],
+  [id*="-count"] {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 4px 8px;
+  }
+
+}
+
+/* ════════════════════════════════════════════════════════════
+   21. MODAL TABLE (Arrear Details) - FULL SCREEN SCROLL
+   ════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  .arrear-modal-table-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-medium) transparent;
+  }
+
+  .arrear-detail-table {
+    min-width: 420px;
+  }
+
+  .arrear-detail-table th {
+    padding: 8px 10px;
+    font-size: 0.7rem;
+  }
+
+  .arrear-detail-table td {
+    padding: 10px 10px;
+    font-size: 0.82rem;
+  }
+
+}

@@ -1,0 +1,927 @@
+/* ============================================================
+   ANDROID DESIGN SYSTEM - FILTERING & PILLS OPTIMIZATION
+   Ensures all filter options and pill selectors display at FULL SIZE
+   Material Design 3 Compliance for Android Devices
+   ============================================================ */
+
+/* ════════════════════════════════════════════════════════════
+   1. FILTER CONTAINERS - FLEXIBLE LAYOUT
+   ════════════════════════════════════════════════════════════ */
+
+.filters-row,
+.filter-row,
+.filter-section {
+  display: flex !important;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 0;
+  margin-bottom: 16px;
+  align-items: flex-start;
+}
+
+/* ════════════════════════════════════════════════════════════
+   2. INDIVIDUAL FILTER ITEMS - NO SHRINKING
+   ════════════════════════════════════════════════════════════ */
+
+.filter-item,
+.filter-item-compact,
+.filter-wrapper,
+.filter-container {
+  display: flex !important;
+  flex-direction: column;
+  flex: 0 1 auto;
+  min-width: 160px;
+  width: auto;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* ════════════════════════════════════════════════════════════
+   3. FILTER LABELS - ALWAYS VISIBLE
+   ════════════════════════════════════════════════════════════ */
+
+.filter-item label,
+.filter-item-compact label,
+.filter-label {
+  display: block !important;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  padding: 0;
+  color: var(--text-primary);
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  width: 100%;
+}
+
+/* ════════════════════════════════════════════════════════════
+   4. FILTER SELECT BOXES - MATERIAL DESIGN SIZE
+   ════════════════════════════════════════════════════════════ */
+
+.filter-select,
+.filter-select-compact,
+select[class*="filter"],
+input[class*="filter"] {
+  display: block !important;
+  width: 100% !important;
+  font-size: 16px;
+  font-family: inherit;
+  padding: 12px 14px;
+  min-height: 48px;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: all 0.2s ease;
+  white-space: normal;
+  overflow: visible;
+}
+
+/* Dropdown arrow styling for select boxes */
+.filter-select::after,
+.filter-select-compact::after {
+  content: '';
+}
+
+/* Focus state for accessibility */
+.filter-select:focus,
+.filter-select-compact:focus,
+select[class*="filter"]:focus,
+input[class*="filter"]:focus {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+  border-color: var(--primary);
+}
+
+/* Active/hover state */
+.filter-select:hover,
+.filter-select-compact:hover {
+  background-color: var(--bg-hover);
+  border-color: var(--border-medium);
+}
+
+/* ════════════════════════════════════════════════════════════
+   5. BATCH PILL SELECTORS - FULL SIZE NO SHRINKING
+   ════════════════════════════════════════════════════════════ */
+
+.batch-pills,
+.batch-selector,
+.batch-filter-container {
+  display: flex !important;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 0;
+  margin: 8px 0;
+  align-items: center;
+}
+
+.batch-pill,
+.batch-tab,
+[class*="batch"][class*="pill"] {
+  display: inline-flex !important;
+  flex: 0 1 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  margin: 0;
+  min-height: 40px;
+  min-width: auto;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.batch-pill:hover,
+.batch-tab:hover {
+  background-color: var(--bg-hover);
+  border-color: var(--border-medium);
+}
+
+.batch-pill.active,
+.batch-tab.active,
+[class*="batch"][class*="pill"].active {
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  font-weight: 600;
+}
+
+/* ════════════════════════════════════════════════════════════
+   6. DEPARTMENT/SECTION PILL SELECTORS - FULL SIZE & SCROLLABLE
+   ════════════════════════════════════════════════════════════ */
+
+.dept-tabs-scroll,
+.dept-pills,
+.dept-selector,
+.section-pills,
+.section-selector,
+.department-filter,
+[class*="dept"][class*="scroll"],
+[class*="dept"][class*="selector"],
+[class*="section"][class*="selector"] {
+  display: flex !important;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 0;
+  margin: 8px 0;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-medium) var(--bg-surface);
+}
+
+/* Webkit scrollbar styling */
+.dept-tabs-scroll::-webkit-scrollbar,
+.dept-pills::-webkit-scrollbar,
+.dept-selector::-webkit-scrollbar,
+[class*="dept"][class*="scroll"]::-webkit-scrollbar {
+  height: 6px;
+}
+
+.dept-tabs-scroll::-webkit-scrollbar-track,
+.dept-pills::-webkit-scrollbar-track,
+.dept-selector::-webkit-scrollbar-track {
+  background: var(--bg-surface);
+  border-radius: 3px;
+}
+
+.dept-tabs-scroll::-webkit-scrollbar-thumb,
+.dept-pills::-webkit-scrollbar-thumb,
+.dept-selector::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: 3px;
+}
+
+.dept-tabs-scroll::-webkit-scrollbar-thumb:hover,
+.dept-pills::-webkit-scrollbar-thumb:hover,
+.dept-selector::-webkit-scrollbar-thumb:hover {
+  background: var(--border);
+}
+
+.dept-pill,
+.dept-tab,
+.dept-button,
+[class*="dept"][class*="pill"],
+[class*="dept"][class*="tab"] {
+  display: inline-flex !important;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 6px;
+  margin: 0;
+  min-height: 16px;
+  min-width: auto;
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1.5px solid var(--border-medium);
+  border-radius: 12px;
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.dept-pill:hover,
+.dept-tab:hover,
+.dept-button:hover {
+  background-color: var(--bg-hover);
+  border-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.dept-pill:active,
+.dept-tab:active,
+.dept-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.dept-pill.active,
+.dept-tab.active,
+.dept-button.active,
+[class*="dept"][class*="pill"].active,
+[class*="dept"][class*="tab"].active {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border-color: var(--primary-dark);
+  font-weight: 600;
+  box-shadow: 0 4px 12px var(--primary-glow);
+  position: relative;
+  overflow: hidden;
+}
+
+.dept-pill.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.dept-pill.active:hover,
+.dept-tab.active:hover {
+  box-shadow: 0 6px 16px var(--primary-glow);
+  transform: translateY(-2px);
+}
+
+/* Badge count styling */
+.dept-pill .badge-count,
+.dept-tab .badge-count,
+.badge-count {
+  display: inline-block;
+  margin-left: 2px;
+  padding: 0px 3px;
+  background-color: rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.dept-pill.active .badge-count,
+.dept-tab.active .badge-count {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: white;
+}
+
+/* Ensure pills don't compress */
+.dept-pill,
+.dept-tab,
+.dept-button {
+  flex-shrink: 0 !important;
+  min-width: auto !important;
+  word-break: keep-all;
+  overflow: visible !important;
+}
+
+/* ════════════════════════════════════════════════════════════
+   LIGHT MODE ENHANCEMENTS
+   ════════════════════════════════════════════════════════════ */
+
+[data-theme="light"] .dept-pill,
+[data-theme="light"] .dept-tab,
+[data-theme="light"] .dept-button {
+  background-color: #F3F4F6;
+  border-color: #D1D5DB;
+  color: #111827;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .dept-pill:hover,
+[data-theme="light"] .dept-tab:hover,
+[data-theme="light"] .dept-button:hover {
+  background-color: #E5E7EB;
+  border-color: #DC2626;
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.12);
+}
+
+[data-theme="light"] .dept-pill.active,
+[data-theme="light"] .dept-tab.active,
+[data-theme="light"] .dept-button.active {
+  background: linear-gradient(135deg, #DC2626, #B91C1C);
+  color: white;
+  border-color: #B91C1C;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+}
+
+[data-theme="light"] .dept-pill .badge-count,
+[data-theme="light"] .dept-tab .badge-count {
+  background-color: rgba(0, 0, 0, 0.08);
+  color: #111827;
+}
+
+[data-theme="light"] .dept-pill.active .badge-count,
+[data-theme="light"] .dept-tab.active .badge-count {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+/* ════════════════════════════════════════════════════════════
+   DARK MODE ENHANCEMENTS
+   ════════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] .dept-pill,
+[data-theme="dark"] .dept-tab,
+[data-theme="dark"] .dept-button {
+  background-color: #1F2937;
+  border-color: #4B5563;
+  color: #F3F4F6;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .dept-pill:hover,
+[data-theme="dark"] .dept-tab:hover,
+[data-theme="dark"] .dept-button:hover {
+  background-color: #374151;
+  border-color: #6366F1;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
+}
+
+[data-theme="dark"] .dept-pill.active,
+[data-theme="dark"] .dept-tab.active,
+[data-theme="dark"] .dept-button.active {
+  background: linear-gradient(135deg, #6366F1, #4F46E5);
+  color: white;
+  border-color: #4F46E5;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+}
+
+[data-theme="dark"] .dept-pill .badge-count,
+[data-theme="dark"] .dept-tab .badge-count {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #F3F4F6;
+}
+
+[data-theme="dark"] .dept-pill.active .badge-count,
+[data-theme="dark"] .dept-tab.active .badge-count {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: white;
+}
+
+/* ════════════════════════════════════════════════════════════
+   7. ROLE PILL SELECTORS - FULL SIZE (KEEP ORIGINAL)
+   ════════════════════════════════════════════════════════════ */
+
+.role-pill-selector,
+.role-pills,
+.role-selector {
+  display: flex !important;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 0;
+  margin: 12px 0;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.role-pill-btn,
+.role-pill,
+[class*="role"][class*="pill"] {
+  display: inline-flex !important;
+  flex: 0 1 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  margin: 0;
+  min-height: 40px;
+  min-width: 120px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 2px solid var(--border-medium);
+  border-radius: 8px;
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.role-pill-btn:hover,
+.role-pill:hover {
+  background-color: var(--bg-hover);
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.role-pill-btn:active,
+.role-pill:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.role-pill-btn.active,
+.role-pill.active {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border-color: var(--primary-dark);
+  font-weight: 600;
+  box-shadow: 0 6px 16px var(--primary-glow);
+  position: relative;
+  overflow: hidden;
+}
+
+.role-pill-btn.active::before,
+.role-pill.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  animation: shimmerRole 2.5s infinite;
+}
+
+@keyframes shimmerRole {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.role-pill-btn.active:hover,
+.role-pill.active:hover {
+  box-shadow: 0 8px 20px var(--primary-glow);
+  transform: translateY(-3px);
+}
+
+/* REVERT: Auth/Staff Sign-In Role Pills - Keep Original Size */
+#auth-role-pills .role-pill-btn {
+  padding: 12px 18px !important;
+  min-height: 40px !important;
+  min-width: 120px !important;
+  font-size: 0.95rem !important;
+  border-radius: 8px !important;
+}
+
+/* ════════════════════════════════════════════════════════════
+   LIGHT MODE ROLE PILLS ENHANCEMENTS
+   ════════════════════════════════════════════════════════════ */
+
+[data-theme="light"] .role-pill-btn,
+[data-theme="light"] .role-pill {
+  background-color: #F9FAFB;
+  border-color: #E5E7EB;
+  color: #111827;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .role-pill-btn:hover,
+[data-theme="light"] .role-pill:hover {
+  background-color: #F3F4F6;
+  border-color: #DC2626;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
+}
+
+[data-theme="light"] .role-pill-btn.active,
+[data-theme="light"] .role-pill.active {
+  background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%);
+  color: white;
+  border-color: #991B1B;
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.25);
+}
+
+[data-theme="light"] .role-pill-btn.active:hover,
+[data-theme="light"] .role-pill.active:hover {
+  box-shadow: 0 8px 24px rgba(220, 38, 38, 0.3);
+}
+
+/* ════════════════════════════════════════════════════════════
+   DARK MODE ROLE PILLS ENHANCEMENTS
+   ════════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] .role-pill-btn,
+[data-theme="dark"] .role-pill {
+  background-color: #1F2937;
+  border-color: #4B5563;
+  color: #F3F4F6;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .role-pill-btn:hover,
+[data-theme="dark"] .role-pill:hover {
+  background-color: #374151;
+  border-color: #6366F1;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+[data-theme="dark"] .role-pill-btn.active,
+[data-theme="dark"] .role-pill.active {
+  background: linear-gradient(135deg, #6366F1 0%, #4338CA 100%);
+  color: white;
+  border-color: #4338CA;
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+}
+
+[data-theme="dark"] .role-pill-btn.active:hover,
+[data-theme="dark"] .role-pill.active:hover {
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35);
+}
+
+/* ════════════════════════════════════════════════════════════
+   8. ANDROID MATERIAL DESIGN - TOUCH TARGETS
+   ════════════════════════════════════════════════════════════ */
+
+@media (hover: none) and (pointer: coarse) {
+  /* Minimum 48x48px touch targets */
+  .filter-select,
+  .filter-select-compact,
+  .batch-pill,
+  .dept-pill,
+  .section-pill,
+  .role-pill-btn {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  /* Extra padding for comfortable touch */
+  .filter-select,
+  .filter-select-compact {
+    padding: 14px 16px;
+  }
+
+  .batch-pill,
+  .dept-pill,
+  .section-pill {
+    padding: 12px 18px;
+  }
+
+  .role-pill-btn {
+    padding: 14px 20px;
+  }
+
+  /* Active state feedback on touch */
+  .batch-pill:active,
+  .dept-pill:active,
+  .section-pill:active,
+  .role-pill-btn:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   9. MOBILE BREAKPOINT - 768px AND BELOW (DEPT PILLS SCROLLABLE)
+   ════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  /* Filter items - stack but don't shrink */
+  .filter-item,
+  .filter-item-compact {
+    flex: 1 1 100%;
+    min-width: 100%;
+    width: 100%;
+  }
+
+  /* Ensure selects take full width */
+  .filter-select,
+  .filter-select-compact {
+    width: 100% !important;
+    font-size: 16px;
+    padding: 12px 14px;
+    min-height: 48px;
+  }
+
+  /* Department pills - horizontal scroll */
+  .dept-tabs-scroll,
+  .dept-pills,
+  .dept-selector,
+  .grade-dept-tabs-scroll,
+  .cr-dept-tabs-scroll,
+  [class*="dept"][class*="scroll"] {
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 8px;
+    width: 100%;
+    padding: 8px 0;
+    margin: 8px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Department pills in rows - never wrap */
+  .dept-pill,
+  .dept-tab,
+  .dept-button,
+  [class*="dept"][class*="pill"],
+  [class*="dept"][class*="tab"] {
+    display: inline-flex !important;
+    flex: 0 0 auto;
+    padding: 3px 6px;
+    font-size: 0.95rem;
+    min-height: 16px;
+    flex-shrink: 0;
+  }
+
+  /* Other pills in rows */
+  .batch-pills,
+  .dept-pills,
+  .section-pills,
+  .role-pill-selector {
+    display: flex !important;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 8px;
+  }
+
+  /* Individual pills stay readable */
+  .batch-pill,
+  .section-pill,
+  .role-pill-btn {
+    display: inline-flex !important;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   10. SMALL PHONE BREAKPOINT - 480px AND BELOW (DEPT SCROLLABLE)
+   ════════════════════════════════════════════════════════════ */
+
+@media (max-width: 480px) {
+  /* Filter items - full width */
+  .filter-item,
+  .filter-item-compact {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  /* Labels stay visible */
+  .filter-item label,
+  .filter-item-compact label {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+
+  /* Selects with good padding */
+  .filter-select,
+  .filter-select-compact {
+    width: 100% !important;
+    font-size: 16px;
+    padding: 12px 14px;
+    min-height: 48px;
+  }
+
+  /* Department pills - horizontal scroll, NO WRAP */
+  .dept-tabs-scroll,
+  .dept-pills,
+  .dept-selector,
+  .grade-dept-tabs-scroll,
+  .cr-dept-tabs-scroll {
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 8px;
+    width: 100%;
+    padding: 8px 0;
+    margin: 8px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Department pills - no compression */
+  .dept-pill,
+  .dept-tab,
+  .dept-button {
+    display: inline-flex !important;
+    flex: 0 0 auto;
+    padding: 3px 5px;
+    font-size: 0.9rem;
+    min-width: auto;
+    flex-shrink: 0;
+  }
+
+  /* Other pills - responsive sizing */
+  .batch-pill,
+  .section-pill,
+  .role-pill-btn {
+    display: inline-flex !important;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    min-width: auto;
+  }
+
+  /* Pills in rows - wrap naturally */
+  .batch-pills,
+  .section-pills,
+  .role-pill-selector {
+    gap: 8px;
+    width: 100%;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   11. VERY SMALL PHONE - 360px AND BELOW (DEPT SCROLLABLE)
+   ════════════════════════════════════════════════════════════ */
+
+@media (max-width: 360px) {
+  /* Maintain readability */
+  .filter-select,
+  .filter-select-compact {
+    font-size: 16px;
+    padding: 11px 12px;
+    min-height: 44px;
+  }
+
+  /* Department pills - still scrollable, no compression */
+  .dept-tabs-scroll,
+  .dept-pills,
+  .dept-selector {
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 6px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Department pills slightly more compact */
+  .dept-pill,
+  .dept-tab {
+    padding: 2px 4px;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  /* Other pills slightly more compact */
+  .batch-pill,
+  .section-pill {
+    padding: 9px 12px;
+    font-size: 0.8rem;
+  }
+
+  .role-pill-btn {
+    padding: 10px 14px;
+    font-size: 0.85rem;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   12. FORCE VISIBILITY - OVERRIDE ANY HIDING
+   ════════════════════════════════════════════════════════════ */
+
+.filter-item,
+.filter-item-compact,
+.filter-select,
+.filter-select-compact,
+.batch-pill,
+.dept-pill,
+.section-pill,
+.role-pill-btn,
+.batch-pills,
+.dept-pills,
+.section-pills,
+.role-pill-selector,
+.filters-row,
+.filter-row {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  position: relative !important;
+}
+
+/* Remove any display:none that might be hiding filters */
+.filter-item[style*="display: none"],
+.filter-select[style*="display: none"],
+.batch-pill[style*="display: none"],
+.dept-pill[style*="display: none"],
+.section-pill[style*="display: none"],
+.role-pill-btn[style*="display: none"] {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* ════════════════════════════════════════════════════════════
+   13. PREVENT FLEX SHRINKING
+   ════════════════════════════════════════════════════════════ */
+
+.filter-item,
+.filter-item-compact,
+.batch-pill,
+.dept-pill,
+.section-pill,
+.role-pill-btn {
+  flex-shrink: 0 !important;
+  min-width: auto !important;
+  word-break: keep-all;
+  overflow: visible !important;
+}
+
+/* ════════════════════════════════════════════════════════════
+   14. TEXT OVERFLOW HANDLING
+   ════════════════════════════════════════════════════════════ */
+
+.batch-pill span,
+.dept-pill span,
+.section-pill span,
+.role-pill-btn span,
+.filter-item label span,
+.filter-select option {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  display: block;
+  word-break: break-word;
+}
+
+/* ════════════════════════════════════════════════════════════
+   15. DARK MODE SUPPORT
+   ════════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] .filter-select,
+[data-theme="dark"] .filter-select-compact,
+[data-theme="dark"] .batch-pill,
+[data-theme="dark"] .dept-pill,
+[data-theme="dark"] .section-pill,
+[data-theme="dark"] .role-pill-btn {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .batch-pill:hover,
+[data-theme="dark"] .dept-pill:hover,
+[data-theme="dark"] .section-pill:hover,
+[data-theme="dark"] .role-pill-btn:hover {
+  background-color: var(--bg-hover);
+}
+
+[data-theme="dark"] .batch-pill.active,
+[data-theme="dark"] .dept-pill.active,
+[data-theme="dark"] .section-pill.active,
+[data-theme="dark"] .role-pill-btn.active {
+  background-color: var(--primary);
+  color: white;
+}

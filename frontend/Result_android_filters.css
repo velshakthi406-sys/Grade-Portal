@@ -1,0 +1,409 @@
+/* ============================================================
+   ANDROID MATERIAL DESIGN 3 - FILTER INPUTS OPTIMIZATION
+   3-4 filters per row using CSS Grid
+   Compact filter box, bold labels, maintain option readability
+   MOBILE ONLY (max-width: 768px) - Desktop unchanged
+   ============================================================ */
+
+/* ════════════════════════════════════════════════════════════
+   1. FILTER BAR GRID - targets .filter-bar AND .filter-bar-compact
+   ════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  .filter-bar,
+  .filter-bar-compact,
+  .sgpa-filters-container .filter-bar,
+  .sgpa-filters-container .filter-bar-compact,
+  .compact-filters .filter-bar-compact,
+  [class*="filters-container"] .filter-bar,
+  [class*="filters-container"] .filter-bar-compact,
+  .filters-row,
+  .filter-row {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px 8px;
+    width: 100%;
+    padding: 8px 0;
+    align-items: end;
+    margin-bottom: 8px;
+  }
+
+  /* 4 per row on wider mobile 600px+ */
+  @media (min-width: 600px) {
+    .filter-bar,
+    .filter-bar-compact,
+    .sgpa-filters-container .filter-bar-compact,
+    .compact-filters .filter-bar-compact {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
+  }
+
+  /* Reset button - 1 column */
+  .filter-item.filter-action-group,
+  .filter-item-compact.filter-action-group {
+    grid-column: span 1;
+  }
+
+/* ════════════════════════════════════════════════════════════
+   2. FILTER ITEM WRAPPER
+   ════════════════════════════════════════════════════════════ */
+
+  .filter-item,
+  .filter-item-compact {
+    display: flex !important;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+/* ════════════════════════════════════════════════════════════
+   3. FILTER LABELS - BOLD, UPPERCASE, COMPACT
+   ════════════════════════════════════════════════════════════ */
+
+  .filter-item label,
+  .filter-item-compact label {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 0.7rem;
+    font-weight: 800 !important;
+    margin-bottom: 3px;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .filter-item label svg,
+  .filter-item-compact label svg {
+    width: 9px;
+    height: 9px;
+    flex-shrink: 0;
+    opacity: 0.75;
+  }
+
+/* ════════════════════════════════════════════════════════════
+   4. FILTER INPUTS & SELECTS - SMALLER BOX, OPTIONS UNCHANGED
+   ════════════════════════════════════════════════════════════ */
+
+  .filter-select,
+  .filter-select-compact,
+  input[type="text"].filter-select,
+  input[type="text"].filter-select-compact,
+  input[type="number"].filter-select,
+  input[type="search"].filter-select {
+    display: block !important;
+    width: 100% !important;
+    font-size: 14px !important;
+    padding: 7px 10px !important;
+    min-height: 36px !important;
+    height: 36px !important;
+    border: 1.5px solid var(--border-medium);
+    border-radius: 6px;
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .filter-select:focus,
+  .filter-select-compact:focus,
+  input[type="text"].filter-select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--primary-glass), 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Placeholder */
+  .filter-select::placeholder,
+  .filter-select-compact::placeholder,
+  input[type="text"].filter-select::placeholder {
+    color: var(--text-muted);
+    opacity: 0.6;
+    font-size: 11px;
+  }
+
+  /* Custom dropdown arrow */
+  select.filter-select,
+  select.filter-select-compact {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 6px center;
+    background-size: 14px;
+    padding-right: 24px !important;
+  }
+
+  /* SELECT OPTIONS - increased readable size */
+  select.filter-select option,
+  select.filter-select-compact option {
+    font-size: 15px !important;
+    padding: 12px 14px !important;
+    line-height: 1.5;
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
+  }
+
+/* ════════════════════════════════════════════════════════════
+   5. MULTI-SELECT BUTTON & DROPDOWN
+   ════════════════════════════════════════════════════════════ */
+
+  .multi-select-btn.filter-select,
+  .multi-select-btn.filter-select-compact {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    font-size: 13px !important;
+    padding: 6px 8px !important;
+    min-height: 34px !important;
+    height: 34px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Multi-select dropdown menu - Material Design 3 popup */
+  .multi-select-menu {
+    font-size: 15px !important;
+    min-width: 180px;
+    z-index: 999;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-light);
+    padding: 6px 0;
+  }
+
+  .multi-select-option {
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .multi-select-option:hover {
+    background-color: var(--bg-hover);
+  }
+
+/* ════════════════════════════════════════════════════════════
+   6. RESET / ACTION BUTTON
+   ════════════════════════════════════════════════════════════ */
+
+  .btn-reset-enhanced {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 100% !important;
+    min-height: 34px !important;
+    height: 34px !important;
+    padding: 6px 8px !important;
+    font-size: 0.72rem !important;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .btn-reset-enhanced .reset-icon {
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  .btn-reset-enhanced .reset-label {
+    font-size: 0.72rem !important;
+    font-weight: 700;
+  }
+
+  .btn-reset-enhanced:active {
+    transform: scale(0.96);
+    opacity: 0.85;
+  }
+
+/* ════════════════════════════════════════════════════════════
+   7. LIGHT MODE
+   ════════════════════════════════════════════════════════════ */
+
+  [data-theme="light"] .filter-select,
+  [data-theme="light"] .filter-select-compact,
+  [data-theme="light"] input[type="text"].filter-select,
+  [data-theme="light"] .multi-select-btn.filter-select,
+  [data-theme="light"] .multi-select-btn.filter-select-compact {
+    background-color: #F9FAFB;
+    border-color: #D1D5DB;
+    color: #111827;
+  }
+
+  [data-theme="light"] .filter-select:focus,
+  [data-theme="light"] .filter-select-compact:focus {
+    border-color: #DC2626;
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.1);
+  }
+
+  [data-theme="light"] .filter-item label,
+  [data-theme="light"] .filter-item-compact label {
+    color: #111827;
+  }
+
+  [data-theme="light"] select.filter-select,
+  [data-theme="light"] select.filter-select-compact {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='2.5'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  }
+
+  [data-theme="light"] select.filter-select option,
+  [data-theme="light"] select.filter-select-compact option {
+    background-color: #FFFFFF;
+    color: #111827;
+  }
+
+/* ════════════════════════════════════════════════════════════
+   8. DARK MODE
+   ════════════════════════════════════════════════════════════ */
+
+  [data-theme="dark"] .filter-select,
+  [data-theme="dark"] .filter-select-compact,
+  [data-theme="dark"] input[type="text"].filter-select,
+  [data-theme="dark"] .multi-select-btn.filter-select,
+  [data-theme="dark"] .multi-select-btn.filter-select-compact {
+    background-color: #1F2937;
+    border-color: #4B5563;
+    color: #F3F4F6;
+  }
+
+  [data-theme="dark"] .filter-select:focus,
+  [data-theme="dark"] .filter-select-compact:focus {
+    border-color: #6366F1;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.12);
+  }
+
+  [data-theme="dark"] .filter-item label,
+  [data-theme="dark"] .filter-item-compact label {
+    color: #F3F4F6;
+  }
+
+  [data-theme="dark"] select.filter-select,
+  [data-theme="dark"] select.filter-select-compact {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F3F4F6' stroke-width='2.5'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  }
+
+  [data-theme="dark"] select.filter-select option,
+  [data-theme="dark"] select.filter-select-compact option {
+    background-color: #1F2937;
+    color: #F3F4F6;
+  }
+
+} /* end @media (max-width: 768px) */
+
+/* ════════════════════════════════════════════════════════════
+   9. SMALL PHONE - 3 PER ROW (max-width: 480px)
+   ════════════════════════════════════════════════════════════ */
+
+@media (max-width: 480px) {
+
+  .filter-bar,
+  .filter-bar-compact,
+  .sgpa-filters-container .filter-bar-compact,
+  .compact-filters .filter-bar-compact,
+  [class*="filters-container"] .filter-bar,
+  [class*="filters-container"] .filter-bar-compact {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px 6px;
+  }
+
+  .filter-select,
+  .filter-select-compact,
+  input[type="text"].filter-select,
+  input[type="text"].filter-select-compact,
+  .multi-select-btn.filter-select,
+  .multi-select-btn.filter-select-compact {
+    font-size: 13px !important;
+    padding: 6px 8px !important;
+    min-height: 32px !important;
+    height: 32px !important;
+    border-radius: 5px;
+  }
+
+  .filter-item label,
+  .filter-item-compact label {
+    font-size: 0.65rem;
+    font-weight: 800 !important;
+    margin-bottom: 2px;
+  }
+
+  .btn-reset-enhanced {
+    min-height: 32px !important;
+    height: 32px !important;
+    padding: 4px 6px !important;
+    font-size: 0.65rem !important;
+  }
+
+  select.filter-select,
+  select.filter-select-compact {
+    background-size: 11px;
+    background-position: right 5px center;
+    padding-right: 20px !important;
+  }
+
+}
+
+/* ════════════════════════════════════════════════════════════
+   10. VERY SMALL PHONE - 2 PER ROW (max-width: 360px)
+   ════════════════════════════════════════════════════════════ */
+
+@media (max-width: 360px) {
+
+  .filter-bar,
+  .filter-bar-compact,
+  .sgpa-filters-container .filter-bar-compact,
+  .compact-filters .filter-bar-compact,
+  [class*="filters-container"] .filter-bar,
+  [class*="filters-container"] .filter-bar-compact {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 5px 5px;
+  }
+
+  .filter-select,
+  .filter-select-compact,
+  input[type="text"].filter-select {
+    font-size: 12px !important;
+    padding: 5px 6px !important;
+    min-height: 30px !important;
+    height: 30px !important;
+    border-radius: 5px;
+  }
+
+  .filter-item label,
+  .filter-item-compact label {
+    font-size: 0.62rem;
+    font-weight: 800 !important;
+    margin-bottom: 2px;
+  }
+
+  .btn-reset-enhanced {
+    min-height: 30px !important;
+    height: 30px !important;
+    padding: 4px 5px !important;
+    font-size: 0.62rem !important;
+  }
+
+}
