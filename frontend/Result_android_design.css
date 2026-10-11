@@ -503,6 +503,11 @@ input[class*="filter"]:focus {
   animation: shimmerRole 2.5s infinite;
 }
 
+#auth-role-pills .role-pill-btn.active::before {
+  content: none;
+  animation: none;
+}
+
 @keyframes shimmerRole {
   0% { left: -100%; }
   100% { left: 100%; }

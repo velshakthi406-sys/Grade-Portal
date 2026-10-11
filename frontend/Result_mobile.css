@@ -2791,3 +2791,49 @@ textarea {
     padding: 16px;
   }
 }
+
+/* Keep vertical page scrolling on the document, not a clipped nested panel. */
+@media (max-width: 768px) {
+  html {
+    height: auto !important;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  body {
+    height: auto !important;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    touch-action: pan-y pinch-zoom;
+    overscroll-behavior-y: auto;
+  }
+
+  .dashboard-layout {
+    height: auto !important;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow: visible !important;
+  }
+
+  .content-grid {
+    height: auto;
+    min-height: 0;
+    flex: 1 0 auto;
+    overflow: visible !important;
+    overscroll-behavior-y: auto;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  #auth-section,
+  #report-card-section {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow: visible !important;
+    touch-action: pan-y pinch-zoom;
+  }
+}
